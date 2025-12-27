@@ -8,6 +8,7 @@ dependencies = [
     "numpy",
     "matplotlib",
     "scipy",
+    "networkx",
 ]
 [tool.ruff]
 line-length = 88
