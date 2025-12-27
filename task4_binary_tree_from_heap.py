@@ -46,7 +46,7 @@ def add_edges(graph, node, pos, x=0, y=0, layer=1):
     return graph
 
 
-def draw_heap_tree(root: Node) -> None:
+def draw_tree(root: Node, filename: str) -> None:
     """Draw heap as tree"""
 
     graph = nx.DiGraph()
@@ -61,8 +61,10 @@ def draw_heap_tree(root: Node) -> None:
     nx.draw(graph, pos, labels=labels, node_color=colors, node_size=2500, arrows=False)
     plt.axis("equal")
     plt.axis("off")
-    plt.savefig("task4_binary_tree_from_heap.png", bbox_inches='tight')
-    print("Tree saved as task4_binary_tree_from_heap.png")
+    plt.savefig(filename, bbox_inches='tight')
+    plt.close()
+
+    print(f"Tree saved as {filename}")
 
 
 if __name__ == "__main__":
@@ -70,4 +72,4 @@ if __name__ == "__main__":
     heapq.heapify(data)  # binary heap
 
     root = heap_to_tree(data)
-    draw_heap_tree(root)
+    draw_tree(root, "task4_binary_tree_from_heap.png")
