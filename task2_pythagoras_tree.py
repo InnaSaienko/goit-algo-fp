@@ -32,4 +32,4 @@ if __name__ == "__main__":
     plt.axis("equal")
     plt.axis("off")
     plt.savefig("task2_pythagoras_tree.png", bbox_inches='tight')
-    print("Tree saved as pythagoras_tree.png")
+    print("Tree saved as task2_pythagoras_tree.png")
