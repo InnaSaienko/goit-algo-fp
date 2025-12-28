@@ -28,13 +28,17 @@ def get_analytical_probabilities() -> dict[int, float]:
     return probabilities
 
 
-def print_table(probabilities: dict) -> None:
-    """Print sum-probability table"""
+def print_table(probs_mc: dict, probs_an: dict) -> None:
+    """Print comparison table"""
 
-    print(f"{'Sum':>3} | {'Probability (%)':>15}")
-    print("-" * 22)
-    for s in sorted(probabilities):
-        print(f"{s:>3} | {probabilities[s]:>14.2f}%")
+    print(f"{'Sum':>3} | {'Monte Carlo (%)':>15} | {'Analytical (%)':>15} | {'Diff (%)':>9}")
+    print("-" * 55)
+
+    for s in range(2, 13):
+        mc = probs_mc[s]
+        an = probs_an[s]
+        diff = abs(mc - an)
+        print(f"{s:>3} | {mc:>15.2f} | {an:>15.2f} | {diff:>9.4f}")
 
 
 def plot_probabilities_table(counts: dict, probabilities: dict) -> None:
@@ -42,4 +46,6 @@ def plot_probabilities_table(counts: dict, probabilities: dict) -> None:
 
 
 if __name__ == "__main__":
-    counts, probabilities = monte_carlo_dice()
+    probs_mc = monte_carlo_dice(100_000)
+    probs_an = get_analytical_probabilities()
+    print_table(probs_mc, probs_an)
