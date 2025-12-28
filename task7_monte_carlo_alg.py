@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 
 def monte_carlo_dice(num_rolls: int = 100_000) -> dict[int, float]:
@@ -41,11 +42,30 @@ def print_table(probs_mc: dict, probs_an: dict) -> None:
         print(f"{s:>3} | {mc:>15.2f} | {an:>15.2f} | {diff:>9.4f}")
 
 
-def plot_probabilities_table(counts: dict, probabilities: dict) -> None:
-    pass
+def plot_probabilities_table(monte_carlo: dict[int, float], analytical: dict[int, float], filename: str) -> None:
+    """Plot Monte Carlo vs analytical probabilities"""
+
+    sums = list(range(2, 13))
+    mc_values = [monte_carlo[s] for s in sums]
+    an_values = [analytical[s] for s in sums]
+
+    plt.figure(figsize=(8, 5))
+    plt.plot(mc_values, sums, marker="o", color="blue", label="Monte Carlo")
+    plt.plot(an_values, sums, marker="o", color="red", label="Analytical")
+
+    plt.xlabel("Probability (%)")
+    plt.ylabel("Sum of two dice")
+    plt.title("Monte Carlo vs Analytical probabilities")
+    plt.legend()
+    plt.grid(True)
+
+    plt.savefig(filename, bbox_inches="tight")
+    plt.close()
 
 
 if __name__ == "__main__":
     probs_mc = monte_carlo_dice(100_000)
     probs_an = get_analytical_probabilities()
     print_table(probs_mc, probs_an)
+    plot_probabilities_table(probs_mc, probs_an, "task7_monte_carlo.png")
+
