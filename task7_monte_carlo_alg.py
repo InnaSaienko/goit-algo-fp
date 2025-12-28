@@ -16,6 +16,16 @@ def monte_carlo_dice(num_rolls: int = 100_000) -> dict[int, float]:
     return probabilities
 
 
+def get_analytical_probabilities() -> dict[int, float]:
+    counts = {s: 0 for s in range(2, 13)}
+    for die_1 in range(1, 7):
+        for die_2 in range(1, 7):
+            counts[die_1 + die_2] += 1
+
+    possible_outcomes = 36
+    probabilities = {k: (v / possible_outcomes) * 100 for k, v in counts.items()}
+
+    return probabilities
 
 
 def print_table(probabilities: dict) -> None:
@@ -29,6 +39,7 @@ def print_table(probabilities: dict) -> None:
 
 def plot_probabilities_table(counts: dict, probabilities: dict) -> None:
     pass
+
 
 if __name__ == "__main__":
     counts, probabilities = monte_carlo_dice()
