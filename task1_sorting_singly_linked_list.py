@@ -6,12 +6,14 @@ from typing import Optional
 @dataclass
 class Node:
     """Single linked list node"""
+
     value: int
     next: Optional["Node"] = None
 
 
 def reverse_linked_list(head):
     """Reverse singly linked list"""
+
     prev = None
     current = head
     while current:
