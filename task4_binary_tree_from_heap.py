@@ -69,7 +69,7 @@ def draw_tree(root: Node, filename: str) -> None:
 
 if __name__ == "__main__":
     data = [7, 3, 5, 1, 9, 8]
-    heapq.heapify(data)  # binary heap
+    heapq.heapify(data)
 
     root = heap_to_tree(data)
     draw_tree(root, "task4_binary_tree_from_heap.png")
